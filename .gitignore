@@ -1,0 +1,22 @@
+# Temporary local references
+tmp/
+
+# Android / Gradle
+.gradle/
+build/
+**/build/
+local.properties
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+
+# Kotlin
+*.kotlin_module
+
+# Generated outputs
+captures/
+reports/
+
+# OS files
+.DS_Store
