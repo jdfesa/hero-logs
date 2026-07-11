@@ -17,6 +17,8 @@ local.properties
 # Generated outputs
 captures/
 reports/
+hs_err_pid*.log
+replay_pid*.log
 
 # OS files
 .DS_Store
