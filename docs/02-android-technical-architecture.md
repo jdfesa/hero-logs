@@ -27,6 +27,10 @@ com.herologs/
     permissions/
     scoring/
     timeline/
+  data/
+    timeline/
+  domain/
+    timeline/
   feature/
     onboarding/
     lifebar/
@@ -152,6 +156,19 @@ DataStore should store small preferences:
 - Theme.
 - User settings.
 - Feature flags.
+
+## First Implemented Vertical Slice
+
+The initial implementation intentionally starts with a local, manually seeded Timeline rather than sensitive device signals.
+
+- `Place` and `TimelineEntry` are persisted in Room.
+- `TimelineRepository` exposes `Flow` for a selected day and an individual entry.
+- A demo Timeline is inserted only after an explicit user action; it is never seeded during app startup.
+- ViewModels expose `StateFlow` for onboarding, LifeBar, Timeline, entry detail, and Settings.
+- Timeline corrections update the local Room data and are reflected by the observed flow.
+- DataStore persists only onboarding state at this stage.
+
+The slice deliberately excludes raw location coordinates, background work, Health Connect, and score calculation. Those features must be added only with their matching permission UX and documentation updates.
 
 ## Testing Strategy
 

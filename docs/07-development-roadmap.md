@@ -21,6 +21,8 @@ Deliverables:
 
 ## Phase 1: Android Shell
 
+Status: completed.
+
 Goals:
 
 - Create native Android project.
@@ -32,13 +34,14 @@ Deliverables:
 
 - `app` module.
 - MainActivity.
-- Compose navigation.
+- Compose navigation for LifeBar, Timeline, Insights, and Settings.
 - LifeBar placeholder.
-- Timeline placeholder.
-- Settings placeholder.
-- CI build.
+- Timeline and Settings placeholders.
+- Reproducible Gradle Wrapper build.
 
 ## Phase 2: Local Data Foundation
+
+Status: completed for the initial Timeline scope.
 
 Goals:
 
@@ -49,12 +52,14 @@ Goals:
 
 Deliverables:
 
-- Local database schema.
-- Fake/demo data mode.
-- Repository interfaces.
-- Unit tests for repositories and mappers.
+- Local Room database schema and exported schema artifact.
+- Explicit local demo-data mode.
+- Timeline repository interface and Room implementation.
+- Unit tests for domain models, mappers, and Timeline ViewModel state.
 
 ## Phase 3: Timeline MVP
+
+Status: first functional cut completed.
 
 Goals:
 
@@ -64,11 +69,11 @@ Goals:
 
 Deliverables:
 
-- Timeline list.
+- Timeline list backed by Room.
 - Entry detail.
-- Place edit.
-- Trip edit.
-- Confidence display.
+- Place/title correction.
+- Trip movement correction.
+- Textual confidence display.
 
 ## Phase 4: Device Signals
 

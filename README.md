@@ -58,9 +58,29 @@ Start here:
 
 ## Current Status
 
-Planning and documentation phase.
+The first local-first Android vertical slice is implemented:
 
-No Android project has been scaffolded yet. The next step is to create the native Android shell once the first architecture decisions are accepted.
+- Kotlin + Jetpack Compose with LifeBar, Timeline, Insights, and Settings navigation.
+- Room persistence for places and timeline entries.
+- DataStore for onboarding state.
+- An explicit, local-only demo Timeline that can be corrected in the UI.
+- ViewModels backed by `StateFlow`, repository contracts, and focused unit tests.
+
+No location, activity recognition, Health Connect, or notification permissions are requested yet. Scores remain intentionally unavailable until the app has enough explainable signals.
+
+Build the debug APK with:
+
+```bash
+./gradlew :app:assembleDebug
+```
+
+Run the unit tests with:
+
+```bash
+./gradlew :app:testDebugUnitTest
+```
+
+For local terminal builds, use Android Studio's bundled JDK or another compatible JDK. The next milestone is integrating real device signals through progressive permission education.
 
 ## Guiding Principles
 

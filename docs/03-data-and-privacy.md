@@ -153,6 +153,18 @@ WeeklyRecap
 
 This model should evolve once real Android implementation begins.
 
+## Implemented MVP Storage
+
+The first Android implementation stores only the minimum data needed for a local, editable Timeline:
+
+- `Place`: name, category, and creation/update timestamps. Coordinates are not stored.
+- `TimelineEntry`: day, type, time range, optional linked place, optional movement type, title, subtitle, confidence, and whether the user edited it.
+- DataStore: onboarding-completion state only.
+
+Demo data is inserted only when the user chooses **Cargar día de ejemplo**. It is local to the device, does not request a permission, and is never inserted automatically at launch.
+
+The Room schema is exported with the source under `app/schemas/` so later schema migrations can be reviewed and tested.
+
 ## Retention Policy
 
 Draft MVP policy:
