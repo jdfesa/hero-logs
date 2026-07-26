@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">HeroLogs</string>
+    <string name="onboarding_loading">Preparando HeroLogs</string>
+    <string name="onboarding_step_indicator">Paso %1$d de %2$d</string>
+    
+    <!-- Step 1: Value Proposition -->
+    <string name="onboarding_value_title">Tu día, claro y en privado.</string>
+    <string name="onboarding_value_subtitle">HeroLogs organiza señales y anotaciones que vos elijas para ayudarte a entender tus días sin presión.</string>
+
+    <!-- Step 2: Privacy Promise -->
+    <string name="onboarding_privacy_badge">LOCAL DESDE EL INICIO</string>
+    <string name="onboarding_privacy_title">Tus datos se quedan en tu teléfono.</string>
+    <string name="onboarding_privacy_body">No hay cuentas ni servidores en la nube en este MVP. Todo tu historial permanece guardado localmente en tu dispositivo.</string>
+
+    <!-- Step 3: Future Signals Preview -->
+    <string name="onboarding_signals_badge">SEÑALES OPCIONALES FUTURAS</string>
+    <string name="onboarding_signals_title">Vos decidís qué compartir más adelante.</string>
+    <string name="onboarding_signals_body">En el futuro podrás activar de forma opcional ubicación, reconocimiento de actividad física o datos de salud. Hoy no te pedimos ningún permiso.</string>
+    <string name="onboarding_signals_notice">Ningún permiso del sistema es solicitado en este momento.</string>
+
+    <!-- Step 4: Ready State -->
+    <string name="onboarding_ready_title">¡Todo listo para empezar!</string>
+    <string name="onboarding_ready_body">Podés explorar la Timeline de ejemplo local de inmediato. Tenés el control total para editar o borrar datos cuando quieras.</string>
+    <string name="onboarding_action_start_no_permissions">Empezar sin permisos</string>
+
+    <!-- Navigation Actions -->
+    <string name="onboarding_action_previous">Anterior</string>
+    <string name="onboarding_action_next">Siguiente</string>
+</resources>
