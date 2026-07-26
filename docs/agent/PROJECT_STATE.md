@@ -16,6 +16,11 @@ Keep this file short. Replace stale values; do not append a session diary.
 
 - Phases 0–3 from `docs/07-development-roadmap.md` are complete for the initial
   local Timeline slice.
+- Phase `P4A` (Progressive Permission Education) is complete:
+  - 4-step onboarding state model in `OnboardingViewModel`.
+  - Multi-step onboarding UI in `OnboardingScreen` with step indicator and Spanish `es-AR` resources.
+  - Unit tests covering step transitions, bounds, and guarded completion.
+  - Verified with `./scripts/verify.sh full` (Tests + assembleDebug PASS).
 - Compose navigation includes LifeBar, Timeline, Insights, and Settings.
 - Room stores places and editable Timeline entries; schema version is 1.
 - DataStore stores onboarding completion.
@@ -26,22 +31,19 @@ Keep this file short. Replace stale values; do not append a session diary.
 Baseline verification on 2026-07-26:
 
 ```text
-./gradlew :app:testDebugUnitTest
-PASS
-
-./gradlew --no-daemon --max-workers=2 :app:assembleDebug
-PASS
+./scripts/verify.sh full
+PASS (testDebugUnitTest + assembleDebug)
 ```
 
 ## Active Phase
 
-- Phase: `P4A`
-- Name: Progressive permission education
+- Phase: `P4B`
+- Name: Permission Capability And Status
 - Status: `READY`
-- Branch: `feature/p4a-permission-education`
+- Branch: `feature/p4b-permission-status`
 - Brief: `docs/agent/CURRENT_PHASE.md`
 
-Only `P4A` is authorized. Do not begin `P4B` in the same branch or conversation.
+Only `P4B` is authorized for the next implementation task. Do not begin `P4B` in the same branch or conversation.
 
 ## Known Human Gates
 
