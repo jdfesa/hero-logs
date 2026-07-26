@@ -2,6 +2,11 @@
 
 This roadmap is intentionally practical for spare-time development.
 
+The smaller execution slices used by coding agents are tracked in
+[`docs/agent/PHASE_PLAN.md`](agent/PHASE_PLAN.md). That plan refines this roadmap
+without changing its product scope. Agents may implement only the active phase
+named in [`docs/agent/PROJECT_STATE.md`](agent/PROJECT_STATE.md).
+
 ## Phase 0: Repository Foundation
 
 Goals:

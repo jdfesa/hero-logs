@@ -20,12 +20,16 @@ Recommended feature branches:
 feature/android-shell
 feature/timeline-mvp
 feature/scoring-engine
+feature/p4a-permission-education
 docs/scoring-model
 ```
 
+Each agent implementation phase uses one branch. Do not combine the next phase
+into the same branch, and do not commit implementation work directly to `main`.
+
 ## Commit Style
 
-Use clear, small commits:
+Use clear, small Conventional Commits in English:
 
 ```text
 docs: add product vision
@@ -34,6 +38,9 @@ chore: initialize android project
 feat: add timeline screen placeholder
 test: cover scoring baseline calculation
 ```
+
+Allowed types include `feat`, `fix`, `refactor`, `test`, `docs`, `build`, `ci`,
+and `chore`. Do not force-push phase branches.
 
 ## Pull Request Checklist
 
@@ -62,3 +69,17 @@ tmp/
 ```
 
 The `tmp/` directory is ignored by Git.
+
+## Agent-Assisted Phases
+
+Repository-wide agent rules live in `AGENTS.md`. Google Antigravity also loads
+the workspace rule and workflow under `.agents/`.
+
+Before coding, an agent must read `docs/agent/PROJECT_STATE.md` and the linked
+current-phase brief. A code phase is complete only after:
+
+- its acceptance criteria are met;
+- `./scripts/verify.sh full` succeeds;
+- affected documentation and agent state are updated;
+- the branch contains reviewable Conventional Commits;
+- the agent stops before the next phase.
