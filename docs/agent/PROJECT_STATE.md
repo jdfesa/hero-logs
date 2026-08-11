@@ -40,7 +40,7 @@ PASS (testDebugUnitTest + assembleDebug)
 - Phase: `P4B`
 - Name: Permission Capability And Status
 - Status: `IN_PROGRESS`
-- Branch: `feature/p4b-settings-status`
+- Branch: `feature/p4b-permission-requests`
 - Brief: `docs/agent/CURRENT_PHASE.md`
 
 Current P4B delivery:
@@ -52,7 +52,9 @@ Current P4B delivery:
 - Foreground location and activity-recognition manifest declarations.
 - Immutable Settings state and truthful status cards for location, activity
   recognition, and unconfigured Health Connect.
-- No permission requests, signal collection, or persistence.
+- Foreground location and activity-recognition requests launch only from
+  explicit Settings actions and refresh status after the system result.
+- No background request, signal collection, or persistence.
 
 Only `P4B` is authorized. Do not begin `P4C` in this branch or conversation.
 
