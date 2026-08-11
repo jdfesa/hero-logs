@@ -107,13 +107,20 @@ The weekly recap should summarize:
 
 ### Privacy Screen
 
-The privacy screen should clearly state:
+Current behavior:
 
-- No account for MVP.
-- No cloud upload for MVP.
-- Local database on device.
-- Permissions can be revoked.
-- Deleting app data removes local history.
+- Settings links to a dedicated Privacy & Data screen.
+- The screen lists Timeline entries, places, and app preferences as the current
+  app-controlled storage categories.
+- It states that HeroLogs has no account or cloud sync and that Android manages
+  permission grants separately from app data.
+- Delete all local data requires an explicit confirmation and removes the Room
+  records plus HeroLogs preferences without relying on uninstall.
+- A successful deletion returns the app to onboarding because onboarding
+  completion is one of the cleared preferences.
+- If preferences fail after Room succeeds, the screen states that Timeline
+  entries and places were already deleted and allows a safe retry.
+- Deleting HeroLogs data does not revoke Android permission grants.
 
 ## Future Scope
 

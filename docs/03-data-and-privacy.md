@@ -169,16 +169,35 @@ Demo data is inserted only when the user chooses **Cargar día de ejemplo**. It 
 
 The Room schema is exported with the source under `app/schemas/` so later schema migrations can be reviewed and tested.
 
+## Implemented Deletion Controls
+
+The Privacy & Data screen lists every category currently controlled by the app:
+
+- Timeline entries stored in Room.
+- Places stored in Room. Coordinates are not part of the current schema.
+- App preferences stored in DataStore, currently onboarding completion only.
+
+Delete all local data is an explicit, confirmed action. It first removes
+Timeline entries and places in one Room transaction, then clears HeroLogs
+preferences. A successful deletion returns the app to onboarding. If the
+preference step fails after Room succeeds, the screen identifies the partial
+result and the operation can be retried safely.
+
+Android permission grants are system-managed state, not HeroLogs storage.
+Deleting local data therefore does not revoke foreground-location or
+activity-recognition grants; users can change those grants in Android settings.
+
 ## Retention Policy
 
-Draft MVP policy:
+Current implemented policy:
 
-- Derived timeline data is kept until user deletion.
-- Temporary raw samples may be deleted after daily processing.
-- Check-ins are kept until user deletion.
-- Weekly recaps are kept until user deletion.
+- Timeline entries, places, and app preferences remain until the user invokes
+  delete all local data, clears app storage through Android, or uninstalls.
+- HeroLogs currently stores no raw location samples, derived coordinates,
+  health records, check-ins, or weekly recaps.
 
-Before shipping, the app needs a visible data deletion path.
+Retention for future raw or derived signal data remains undecided and must be
+approved before that data is collected or persisted.
 
 ## Security Notes
 

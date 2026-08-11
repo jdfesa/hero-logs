@@ -50,7 +50,7 @@ Do not collect or persist any signal. Do not request background location.
 
 ## P4C — Local Data Controls
 
-Status: `READY`
+Status: `COMPLETE`
 
 Branch: `feature/p4c-local-data-controls`
 
@@ -64,7 +64,7 @@ Do not add export, encryption, cloud backup, or selective deletion.
 
 ## P4D — Signal Contracts And Retention Decision
 
-Status: `PLANNED`, with a human gate
+Status: `BLOCKED`, human gate required
 
 Branch: `feature/p4d-signal-contracts`
 

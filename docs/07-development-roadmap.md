@@ -101,6 +101,8 @@ Current progress:
 - Progressive permission education is implemented.
 - Foreground-location and activity-recognition status and explicit Settings
   requests are implemented without signal collection.
+- Local-data inventory, confirmed deletion across Room and DataStore, truthful
+  partial-failure handling, and the Privacy & Data screen are implemented.
 - Location, activity, Health Connect data sources, and background processing
   remain later Phase 4 work.
 
@@ -145,8 +147,8 @@ Goals:
 
 Deliverables:
 
-- Data deletion flow.
-- Permission status screen.
+- Data deletion flow (implemented before Phase 7).
+- Permission status screen (implemented before Phase 7).
 - Accessibility pass.
 - README screenshots.
 - Alpha checklist.

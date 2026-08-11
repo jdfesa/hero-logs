@@ -136,9 +136,12 @@ Purpose:
 Main UI:
 
 - Local-only status.
-- Permission status.
-- Data sources.
-- Delete data.
+- Exact stored categories: Timeline entries, places, and app preferences.
+- Notice that Android permission grants are system-managed.
+- Confirmed delete-all-local-data action.
+- Progress, success, database failure, and partial preferences failure states.
+- Back navigation to Settings; the bottom navigation remains hidden on this
+  detail route.
 - Export data eventually.
 
 ### Settings
@@ -156,7 +159,7 @@ Main UI:
   activity-recognition, and Health Connect status.
 - Explicit request actions only for missing foreground-location and
   activity-recognition access.
-- Data controls.
+- Entry point to Privacy & Data controls.
 - About.
 
 ## Visual Direction
