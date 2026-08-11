@@ -1,22 +1,26 @@
-# P4B: Permission Capability And Status
+# P4C: Local Data Controls
 
 Status: `READY`
 
-Branch: `feature/p4b-permission-status`
+Branch: `feature/p4c-local-data-controls`
 
 ## Objective
 
-Add domain-level capability and status models and an Android implementation that can read current foreground-location and activity-recognition permission state. Render accurate status in Settings and connect requests only to explicit user actions after education.
+Before collecting sensitive signals, add a Privacy/Data screen that accurately
+lists stored categories and provides a confirmed **delete all local HeroLogs
+data** flow.
 
 ## Scope
 
-- Domain-level permission capability and status models.
-- Android platform implementations for checking location and activity recognition permission state.
-- Expose permission status to Settings.
-- Keep Health Connect as unavailable / not configured.
-- Unit tests for permission state mapping.
+- List the categories currently stored by Room and DataStore.
+- Add a confirmed delete-all flow that clears Room data and relevant DataStore
+  preferences without relying on uninstall.
+- Add repository/use-case tests for deletion behavior.
+- Update privacy documentation to match the implemented controls.
 
 ## Out Of Scope
 
-- Collecting or persisting location/activity signals.
-- Background location requests.
+- Export.
+- Encryption.
+- Cloud backup.
+- Selective deletion.
