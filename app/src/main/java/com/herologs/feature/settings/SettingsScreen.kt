@@ -1,5 +1,8 @@
 package com.herologs.feature.settings
 
+import android.Manifest
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -42,9 +45,35 @@ fun SettingsRoute(
     LaunchedEffect(viewModel) {
         viewModel.refreshPermissions()
     }
+    val locationPermissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestMultiplePermissions(),
+    ) {
+        viewModel.refreshPermissions()
+    }
+    val activityPermissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission(),
+    ) {
+        viewModel.refreshPermissions()
+    }
     SettingsScreen(
         uiState = uiState,
         onShowOnboardingAgain = viewModel::showOnboardingAgain,
+        onRequestPermission = { capability ->
+            when (capability) {
+                PermissionCapability.FOREGROUND_LOCATION -> locationPermissionLauncher.launch(
+                    arrayOf(
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                    ),
+                )
+
+                PermissionCapability.ACTIVITY_RECOGNITION -> activityPermissionLauncher.launch(
+                    Manifest.permission.ACTIVITY_RECOGNITION,
+                )
+
+                PermissionCapability.HEALTH_CONNECT -> Unit
+            }
+        },
     )
 }
 
@@ -52,6 +81,7 @@ fun SettingsRoute(
 fun SettingsScreen(
     uiState: SettingsUiState,
     onShowOnboardingAgain: () -> Unit,
+    onRequestPermission: (PermissionCapability) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -74,7 +104,10 @@ fun SettingsScreen(
             style = MaterialTheme.typography.labelLarge,
         )
         uiState.permissionOverview.capabilities.forEach { permissionState ->
-            PermissionStatusCard(permissionState)
+            PermissionStatusCard(
+                state = permissionState,
+                onRequestPermission = onRequestPermission,
+            )
         }
         Card(
             colors = CardDefaults.cardColors(containerColor = Surface),
@@ -119,7 +152,10 @@ fun SettingsScreen(
 }
 
 @Composable
-private fun PermissionStatusCard(state: PermissionCapabilityState) {
+private fun PermissionStatusCard(
+    state: PermissionCapabilityState,
+    onRequestPermission: (PermissionCapability) -> Unit,
+) {
     val copy = state.toCopy()
     Card(
         colors = CardDefaults.cardColors(containerColor = Surface),
@@ -142,6 +178,19 @@ private fun PermissionStatusCard(state: PermissionCapabilityState) {
                 color = MutedInk,
                 style = MaterialTheme.typography.bodyMedium,
             )
+            if (state.canRequest) {
+                val actionRes = checkNotNull(copy.actionRes)
+                Spacer(Modifier.height(12.dp))
+                Button(
+                    onClick = { onRequestPermission(state.capability) },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Ink,
+                        contentColor = Surface,
+                    ),
+                ) {
+                    Text(stringResource(actionRes))
+                }
+            }
         }
     }
 }
@@ -150,7 +199,12 @@ private data class PermissionStatusCopy(
     @param:StringRes val titleRes: Int,
     @param:StringRes val statusRes: Int,
     @param:StringRes val bodyRes: Int,
+    @param:StringRes val actionRes: Int?,
 )
+
+private val PermissionCapabilityState.canRequest: Boolean
+    get() = access == PermissionAccessStatus.NOT_GRANTED &&
+        capability != PermissionCapability.HEALTH_CONNECT
 
 private fun PermissionCapabilityState.toCopy(): PermissionStatusCopy = when (capability) {
     PermissionCapability.FOREGROUND_LOCATION -> PermissionStatusCopy(
@@ -165,6 +219,7 @@ private fun PermissionCapabilityState.toCopy(): PermissionStatusCopy = when (cap
             PermissionAccessStatus.LIMITED -> R.string.settings_location_approximate_body
             else -> R.string.settings_location_missing_body
         },
+        actionRes = R.string.settings_location_action,
     )
 
     PermissionCapability.ACTIVITY_RECOGNITION -> PermissionStatusCopy(
@@ -179,12 +234,14 @@ private fun PermissionCapabilityState.toCopy(): PermissionStatusCopy = when (cap
             PermissionAccessStatus.NOT_REQUIRED -> R.string.settings_activity_not_required_body
             else -> R.string.settings_activity_missing_body
         },
+        actionRes = R.string.settings_activity_action,
     )
 
     PermissionCapability.HEALTH_CONNECT -> PermissionStatusCopy(
         titleRes = R.string.settings_health_connect_title,
         statusRes = R.string.settings_status_not_configured,
         bodyRes = R.string.settings_health_connect_body,
+        actionRes = null,
     )
 }
 

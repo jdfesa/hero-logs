@@ -45,9 +45,11 @@
     <string name="settings_location_precise_body">HeroLogs can access precise location while the app is in use.</string>
     <string name="settings_location_approximate_body">HeroLogs has approximate location access, so future timeline detail may be reduced.</string>
     <string name="settings_location_missing_body">HeroLogs works without location. You can choose to connect it later.</string>
+    <string name="settings_location_action">Connect foreground location</string>
     <string name="settings_activity_granted_body">HeroLogs can read recognized activity while supported features are in use.</string>
     <string name="settings_activity_not_required_body">This Android version does not require a runtime permission for activity recognition.</string>
     <string name="settings_activity_missing_body">HeroLogs works without activity recognition. Future trip confidence may be lower.</string>
+    <string name="settings_activity_action">Connect activity recognition</string>
     <string name="settings_health_connect_body">Health Connect is optional and is not configured in this version.</string>
     <string name="settings_experience_eyebrow">EXPERIENCE</string>
     <string name="settings_onboarding_title">View the introduction again</string>
