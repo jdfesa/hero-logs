@@ -25,6 +25,16 @@ The app should request permissions progressively, close to the moment of value:
 - Health Connect for steps, sleep, workouts, and related signals.
 - Notifications only if check-ins or recaps require them.
 
+Current Android behavior:
+
+- Settings shows the current foreground-location and activity-recognition grant
+  state without requesting access on screen entry.
+- Approximate location is distinguished from precise location.
+- Foreground location and activity recognition can be requested only through
+  their explicit Settings actions after explanatory copy is visible.
+- Health Connect remains visible as optional and not configured.
+- Permission grants do not start signal collection or persistence by themselves.
+
 ### Daily Timeline
 
 The timeline should show:

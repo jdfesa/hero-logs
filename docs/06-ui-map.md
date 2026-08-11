@@ -152,7 +152,10 @@ Main UI:
 - Theme.
 - Notifications.
 - Check-in schedule.
-- Permissions.
+- Scrollable permission cards with accurate foreground-location,
+  activity-recognition, and Health Connect status.
+- Explicit request actions only for missing foreground-location and
+  activity-recognition access.
 - Data controls.
 - About.
 

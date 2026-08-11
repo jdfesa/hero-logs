@@ -39,6 +39,13 @@ run_debug_build() {
         :app:assembleDebug
 }
 
+run_debug_android_test_build() {
+    ./gradlew \
+        --no-daemon \
+        --max-workers="${GRADLE_WORKERS}" \
+        :app:assembleDebugAndroidTest
+}
+
 case "${MODE}" in
     docs)
         verify_docs
@@ -52,6 +59,7 @@ case "${MODE}" in
         # Separate invocations reduce Gradle daemon memory pressure on local Macs.
         run_unit_tests
         run_debug_build
+        run_debug_android_test_build
         ;;
     *)
         echo "Usage: $0 [docs|quick|full]" >&2
