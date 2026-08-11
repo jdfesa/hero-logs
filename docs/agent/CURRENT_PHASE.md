@@ -1,26 +1,29 @@
-# P4C: Local Data Controls
+# P4D: Signal Contracts And Retention Decision
 
-Status: `IN_PROGRESS`
+Status: `BLOCKED` — human decision required
 
-Branch: `feature/p4c-privacy-data-screen`
+Branch: `feature/p4d-signal-contracts`
 
-## Objective
+## Required Decision
 
-Before collecting sensitive signals, add a Privacy/Data screen that accurately
-lists stored categories and provides a confirmed **delete all local HeroLogs
-data** flow.
+Before implementation, record an approved ADR answering:
 
-## Scope
+- whether derived place coordinates may be stored;
+- whether temporary raw location samples may be stored;
+- exact retention and cleanup behavior;
+- minimum precision needed for the MVP.
 
-- List the categories currently stored by Room and DataStore.
-- Add a confirmed delete-all flow that clears Room data and relevant DataStore
-  preferences without relying on uninstall.
-- Add repository/use-case tests for deletion behavior.
-- Update privacy documentation to match the implemented controls.
+The agent must not choose the ADR outcome.
+
+## Scope After Approval
+
+- Define Android-light location and activity signal models.
+- Define source contracts, normalization rules, and deterministic fakes.
+- Test validation, time ordering, confidence bounds, and redaction-safe
+  diagnostics.
 
 ## Out Of Scope
 
-- Export.
-- Encryption.
-- Cloud backup.
-- Selective deletion.
+- Platform signal collection.
+- Foreground or background tracking.
+- Persistence not explicitly authorized by the approved ADR.

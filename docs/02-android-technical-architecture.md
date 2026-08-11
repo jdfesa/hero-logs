@@ -28,8 +28,10 @@ com.herologs/
     scoring/
     timeline/
   data/
+    local/
     timeline/
   domain/
+    localdata/
     timeline/
   feature/
     onboarding/
@@ -187,6 +189,28 @@ AndroidPermissionStatusReader -> MapPermissionStatusUseCase -> domain models
   explicit user-initiated requests.
 - Health Connect remains not configured.
 - This slice does not read, collect, log, or persist location or activity data.
+
+## Local Data Controls Slice
+
+Local-data controls preserve the inward dependency direction:
+
+```text
+PrivacyDataScreen -> PrivacyDataViewModel -> local-data use cases
+DefaultLocalDataRepository -> RoomLocalDataCleaner + PreferencesLocalDataCleaner
+```
+
+- `LocalDataRepository` exposes the current storage inventory and a structured
+  delete-all result without importing Android APIs.
+- Room deletes Timeline entries before places inside one transaction, so an
+  internal database failure rolls the whole Room operation back.
+- DataStore clearing is independent and retry-safe. Room is cleared first so a
+  preference failure cannot hide remaining Timeline data behind onboarding.
+- A preference-stage failure reports Timeline entries and places as already
+  cleared instead of claiming cross-store atomicity.
+- Coroutine cancellation is propagated rather than converted into a product
+  failure.
+- `PrivacyDataViewModel` exposes immutable confirmation, progress, success, and
+  partial-failure state; the UI never accesses Room or DataStore directly.
 
 ## Testing Strategy
 

@@ -6,7 +6,7 @@ Keep this file short. Replace stale values; do not append a session diary.
 
 - Last verified: 2026-08-11
 - Base branch: `main`
-- Baseline commit: `5284787` (merge of P4B completion state)
+- Baseline commit: `91926e9` (merge of P4C Privacy & Data screen)
 - Android package: `com.herologs`
 - Minimum SDK: 26
 - Target and compile SDK: 36
@@ -30,7 +30,15 @@ Keep this file short. Replace stale values; do not append a session diary.
   - Explicit foreground-location and activity-recognition request actions.
   - JVM mapping/state tests and Compose instrumentation coverage.
   - Delivered through PRs #3–#8; latest verified code merge: `4773eea`.
-- Compose navigation includes LifeBar, Timeline, Insights, and Settings.
+- Phase `P4C` (Local Data Controls) is complete:
+  - Android-light storage inventory and deletion result contracts.
+  - Transactional Room clearing plus retry-safe DataStore clearing.
+  - Truthful database and partial-preferences failure semantics.
+  - Confirmed Privacy & Data screen reachable from Settings.
+  - JVM, in-memory Room, and Compose coverage for core deletion behavior.
+  - Delivered through PRs #9–#14; verified code commit: `21de170`.
+- Compose navigation includes LifeBar, Timeline, Insights, Settings, and the
+  Privacy & Data detail route.
 - Room stores places and editable Timeline entries; schema version is 1.
 - DataStore stores onboarding completion.
 - Demo Timeline insertion is explicit, local, and correctable.
@@ -44,25 +52,28 @@ Full verification on 2026-08-11:
 PASS (testDebugUnitTest + assembleDebug + assembleDebugAndroidTest)
 ```
 
-Pending manual checks: run the Compose instrumentation tests and exercise both
-system permission dialogs on an Android device or emulator.
+Pending manual checks: run the Room and Compose instrumentation tests, exercise
+the delete-all flow, and exercise both system permission dialogs on an Android
+device or emulator.
 
 ## Active Phase
 
-- Phase: `P4C`
-- Name: Local Data Controls
-- Status: `IN_PROGRESS`
-- Branch: `feature/p4c-privacy-data-screen`
-- Brief: `docs/agent/CURRENT_PHASE.md`
+- Phase: none authorized
+- Status: `BLOCKED`
+- Next candidate: `P4D` (Signal Contracts And Retention Decision)
+- Candidate branch: `feature/p4d-signal-contracts`
+- Blocked brief: `docs/agent/CURRENT_PHASE.md`
 
-Last completed phase: `P4B`.
+Last completed phase: `P4C`.
 
-Only `P4C` is authorized. Do not begin `P4D` in this branch or conversation.
+Do not begin `P4D` until its retention and precision ADR receives a human
+decision.
 
 ## Known Human Gates
 
-- Before persistent location work: decide whether derived place coordinates may
-  be stored and how long temporary raw samples may exist.
+- `P4D` is blocked until a human decides whether derived place coordinates and
+  temporary raw samples may be stored, their exact retention/cleanup behavior,
+  and the minimum precision needed for the MVP.
 - Before background collection: approve the foreground/background tracking
   product behavior and battery budget.
 - Before scoring: approve baseline duration, provisional formula, and when low
@@ -70,7 +81,8 @@ Only `P4C` is authorized. Do not begin `P4D` in this branch or conversation.
 - Before public alpha: decide whether Health Connect and weekly recap are MVP
   release blockers.
 
-These are future gates. They do not block `P4C`.
+The first gate blocks the next implementation phase. The others remain future
+gates.
 
 ## State Update Rules
 
