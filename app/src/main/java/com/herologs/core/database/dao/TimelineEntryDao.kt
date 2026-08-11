@@ -11,6 +11,9 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TimelineEntryDao {
+    @Query("SELECT COUNT(*) FROM timeline_entries")
+    suspend fun countAll(): Int
+
     @Transaction
     @Query(
         """
@@ -31,6 +34,9 @@ interface TimelineEntryDao {
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insertAll(entries: List<TimelineEntryEntity>): List<Long>
+
+    @Query("DELETE FROM timeline_entries")
+    suspend fun deleteAll(): Int
 
     @Query(
         """
