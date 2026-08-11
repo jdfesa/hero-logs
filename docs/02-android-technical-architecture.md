@@ -170,6 +170,24 @@ The initial implementation intentionally starts with a local, manually seeded Ti
 
 The slice deliberately excludes raw location coordinates, background work, Health Connect, and score calculation. Those features must be added only with their matching permission UX and documentation updates.
 
+## Permission Status Slice
+
+Permission state follows the existing inward dependency direction:
+
+```text
+Settings UI -> SettingsViewModel -> PermissionStatusReader
+AndroidPermissionStatusReader -> MapPermissionStatusUseCase -> domain models
+```
+
+- Domain models distinguish precise, approximate, missing, not-required, and
+  not-configured states without importing Android APIs.
+- `AndroidPermissionStatusReader` checks current foreground-location and
+  activity-recognition grants and is wired through `AppContainer`.
+- Settings renders immutable state and owns Activity Result launchers for
+  explicit user-initiated requests.
+- Health Connect remains not configured.
+- This slice does not read, collect, log, or persist location or activity data.
+
 ## Testing Strategy
 
 Start with focused tests:
@@ -180,6 +198,9 @@ Start with focused tests:
 - Compose UI tests for core screens.
 
 Add instrumentation tests when permissions and Android framework behavior become important.
+
+The full verification task compiles the debug instrumentation APK so permission
+UI tests cannot silently drift, even when no emulator is available.
 
 ## Tooling
 

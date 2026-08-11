@@ -161,6 +161,10 @@ The first Android implementation stores only the minimum data needed for a local
 - `TimelineEntry`: day, type, time range, optional linked place, optional movement type, title, subtitle, confidence, and whether the user edited it.
 - DataStore: onboarding-completion state only.
 
+Foreground-location and activity-recognition permission status is read on
+demand from Android and is not persisted by HeroLogs. Declaring or granting a
+permission does not start signal collection. Health Connect is not configured.
+
 Demo data is inserted only when the user chooses **Cargar día de ejemplo**. It is local to the device, does not request a permission, and is never inserted automatically at launch.
 
 The Room schema is exported with the source under `app/schemas/` so later schema migrations can be reviewed and tested.

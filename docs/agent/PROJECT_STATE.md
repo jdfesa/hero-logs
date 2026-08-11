@@ -40,7 +40,7 @@ PASS (testDebugUnitTest + assembleDebug)
 - Phase: `P4B`
 - Name: Permission Capability And Status
 - Status: `IN_PROGRESS`
-- Branch: `feature/p4b-permission-requests`
+- Branch: `test/p4b-permission-ui`
 - Brief: `docs/agent/CURRENT_PHASE.md`
 
 Current P4B delivery:
@@ -54,6 +54,10 @@ Current P4B delivery:
   recognition, and unconfigured Health Connect.
 - Foreground location and activity-recognition requests launch only from
   explicit Settings actions and refresh status after the system result.
+- Compose instrumentation coverage verifies that request events require button
+  clicks and disappear for connected or unavailable capabilities.
+- Product, architecture, privacy, permission, UI, and roadmap docs match the
+  implemented behavior.
 - No background request, signal collection, or persistence.
 
 Only `P4B` is authorized. Do not begin `P4C` in this branch or conversation.

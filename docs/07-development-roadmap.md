@@ -96,6 +96,14 @@ Deliverables:
 - Health data source.
 - Battery-aware processing strategy.
 
+Current progress:
+
+- Progressive permission education is implemented.
+- Foreground-location and activity-recognition status and explicit Settings
+  requests are implemented without signal collection.
+- Location, activity, Health Connect data sources, and background processing
+  remain later Phase 4 work.
+
 ## Phase 5: Scoring MVP
 
 Goals:

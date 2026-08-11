@@ -87,6 +87,20 @@ Each sensitive permission should have a pre-permission screen with:
 - Where data is stored.
 - A continue and skip path.
 
+## Current Android Implementation
+
+- The onboarding flow explains local operation and future optional signals
+  before Settings offers any system permission action.
+- Settings reads and displays current foreground-location and
+  activity-recognition status.
+- Approximate location is shown as limited rather than precise access.
+- System dialogs launch only after the user taps the matching Settings action.
+- Activity recognition is treated as not requiring a runtime permission before
+  Android 10.
+- Health Connect is visible but not configured.
+- Background location is neither declared nor requested.
+- No permission result starts signal collection or persists sensitive data.
+
 ## Degraded Modes
 
 HeroLogs should have clear behavior when permissions are missing:
