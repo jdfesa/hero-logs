@@ -8,8 +8,14 @@ import com.herologs.core.database.entity.PlaceEntity
 
 @Dao
 interface PlaceDao {
+    @Query("SELECT COUNT(*) FROM places")
+    suspend fun countAll(): Int
+
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insert(place: PlaceEntity): Long
+
+    @Query("DELETE FROM places")
+    suspend fun deleteAll(): Int
 
     @Query(
         """
