@@ -25,7 +25,7 @@ Every code phase must:
 
 ## P4A — Progressive Permission Education
 
-Status: `READY`
+Status: `COMPLETE`
 
 Branch: `feature/p4a-permission-education`
 
@@ -35,7 +35,7 @@ permissions. The full authorized scope is in `CURRENT_PHASE.md`.
 
 ## P4B — Permission Capability And Status
 
-Status: `PLANNED`
+Status: `COMPLETE`
 
 Branch: `feature/p4b-permission-status`
 
@@ -50,7 +50,7 @@ Do not collect or persist any signal. Do not request background location.
 
 ## P4C — Local Data Controls
 
-Status: `PLANNED`
+Status: `READY`
 
 Branch: `feature/p4c-local-data-controls`
 
