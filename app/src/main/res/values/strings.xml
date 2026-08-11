@@ -2,7 +2,7 @@
     <string name="app_name">HeroLogs</string>
     <string name="onboarding_loading">Preparando HeroLogs</string>
     <string name="onboarding_step_indicator">Paso %1$d de %2$d</string>
-    
+
     <!-- Step 1: Value Proposition -->
     <string name="onboarding_value_title">Tu día, claro y en privado.</string>
     <string name="onboarding_value_subtitle">HeroLogs organiza señales y anotaciones que vos elijas para ayudarte a entender tus días sin presión.</string>
