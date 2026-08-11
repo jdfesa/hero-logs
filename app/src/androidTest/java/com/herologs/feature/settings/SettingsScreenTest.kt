@@ -85,6 +85,32 @@ class SettingsScreenTest {
         )
     }
 
+    @Test
+    fun localDataManagementOpensOnlyAfterExplicitClick() {
+        var openCount = 0
+        composeRule.setContent {
+            HeroLogsTheme {
+                SettingsScreen(
+                    uiState = settingsState(
+                        location = PermissionAccessStatus.GRANTED,
+                        activity = PermissionAccessStatus.NOT_REQUIRED,
+                    ),
+                    onOpenPrivacyData = { openCount += 1 },
+                    onShowOnboardingAgain = {},
+                    onRequestPermission = {},
+                )
+            }
+        }
+
+        assertEquals(0, openCount)
+
+        composeRule.onNodeWithText("Manage local data")
+            .performScrollTo()
+            .performClick()
+
+        assertEquals(1, openCount)
+    }
+
     private fun settingsState(
         location: PermissionAccessStatus,
         activity: PermissionAccessStatus,
