@@ -5,8 +5,10 @@ import androidx.room.Room
 import com.herologs.core.database.HeroLogsDatabase
 import com.herologs.core.datastore.UserPreferencesRepository
 import com.herologs.core.datastore.userPreferencesDataStore
+import com.herologs.core.permissions.AndroidPermissionStatusReader
 import com.herologs.data.timeline.DemoTimelineSeeder
 import com.herologs.data.timeline.RoomTimelineRepository
+import com.herologs.domain.permissions.PermissionStatusReader
 import com.herologs.domain.timeline.SeedDemoTimelineUseCase
 import com.herologs.domain.timeline.TimelineDemoData
 import com.herologs.domain.timeline.TimelineRepository
@@ -36,6 +38,8 @@ class AppContainer(context: Context) {
     val userPreferencesRepository = UserPreferencesRepository(
         dataStore = context.userPreferencesDataStore,
     )
+
+    val permissionStatusReader: PermissionStatusReader = AndroidPermissionStatusReader(context)
 
     private companion object {
         const val DATABASE_NAME = "hero_logs.db"
