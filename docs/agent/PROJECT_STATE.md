@@ -52,7 +52,7 @@ system permission dialogs on an Android device or emulator.
 - Phase: `P4C`
 - Name: Local Data Controls
 - Status: `IN_PROGRESS`
-- Branch: `feature/p4c-local-data-repository`
+- Branch: `feature/p4c-privacy-data-screen`
 - Brief: `docs/agent/CURRENT_PHASE.md`
 
 Last completed phase: `P4B`.

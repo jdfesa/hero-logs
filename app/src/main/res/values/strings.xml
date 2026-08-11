@@ -32,6 +32,7 @@
     <string name="settings_privacy_eyebrow">PRIVACY</string>
     <string name="settings_privacy_title">Your data stays local</string>
     <string name="settings_privacy_body">HeroLogs has no account or cloud sync. Permission status is read on this device.</string>
+    <string name="settings_privacy_action">Manage local data</string>
     <string name="settings_permissions_eyebrow">PERMISSIONS</string>
     <string name="settings_location_title">Foreground location</string>
     <string name="settings_activity_title">Activity recognition</string>
@@ -56,4 +57,30 @@
     <string name="settings_onboarding_body">Review how local mode and optional permissions work.</string>
     <string name="settings_onboarding_updating">Updating…</string>
     <string name="settings_onboarding_action">Show introduction</string>
+
+    <!-- Privacy and local data -->
+    <string name="privacy_back">‹ Back</string>
+    <string name="privacy_eyebrow">PRIVACY &amp; DATA</string>
+    <string name="privacy_title">Your local data</string>
+    <string name="privacy_intro">HeroLogs currently stores the following categories only on this device.</string>
+    <string name="privacy_timeline_title">Timeline entries</string>
+    <string name="privacy_timeline_body">Your local day history, including times, titles, confidence, movement corrections, and links to places.</string>
+    <string name="privacy_places_title">Places</string>
+    <string name="privacy_places_body">Names and categories for places referenced by Timeline entries. HeroLogs does not currently store coordinates.</string>
+    <string name="privacy_preferences_title">App preferences</string>
+    <string name="privacy_preferences_body">Small app state such as whether you completed the introduction.</string>
+    <string name="privacy_permissions_title">System permissions stay under Android control</string>
+    <string name="privacy_permissions_body">Permission grants are not stored as HeroLogs data. Deleting local data does not revoke location or activity permissions; you can change them in Android settings.</string>
+    <string name="privacy_delete_title">Delete all local data</string>
+    <string name="privacy_delete_body">Permanently removes Timeline entries, places, and app preferences. You will return to the introduction. System permissions are not revoked.</string>
+    <string name="privacy_delete_action">Delete all local data</string>
+    <string name="privacy_delete_dialog_title">Delete all local HeroLogs data?</string>
+    <string name="privacy_delete_dialog_body">This cannot be undone. Timeline entries, places, and app preferences will be removed from this device. Android permission grants will remain unchanged.</string>
+    <string name="privacy_delete_confirm">Delete all data</string>
+    <string name="privacy_delete_cancel">Cancel</string>
+    <string name="privacy_delete_failure_title">Deletion did not finish</string>
+    <string name="privacy_delete_database_failure">HeroLogs could not delete the local database. No app preferences were cleared. Try again.</string>
+    <string name="privacy_delete_preferences_failure">Timeline entries and places were deleted, but app preferences could not be cleared. Try again to finish.</string>
+    <string name="privacy_delete_success_title">Local data deleted</string>
+    <string name="privacy_delete_success_body">HeroLogs removed its local data. The introduction will open again.</string>
 </resources>

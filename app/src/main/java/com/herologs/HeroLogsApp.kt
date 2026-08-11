@@ -35,6 +35,8 @@ import com.herologs.feature.lifebar.LifeBarRoute
 import com.herologs.feature.lifebar.LifeBarViewModel
 import com.herologs.feature.onboarding.OnboardingScreen
 import com.herologs.feature.onboarding.OnboardingViewModel
+import com.herologs.feature.privacy.PrivacyDataRoute
+import com.herologs.feature.privacy.PrivacyDataViewModel
 import com.herologs.feature.settings.SettingsRoute
 import com.herologs.feature.settings.SettingsViewModel
 import com.herologs.feature.timeline.TimelineEntryDetailRoute
@@ -150,7 +152,22 @@ private fun HeroLogsNavigation(appContainer: AppContainer) {
                         permissionStatusReader = appContainer.permissionStatusReader,
                     )
                 }
-                SettingsRoute(viewModel = viewModel(factory = factory))
+                SettingsRoute(
+                    onOpenPrivacyData = { navController.navigate(PRIVACY_DATA_ROUTE) },
+                    viewModel = viewModel(factory = factory),
+                )
+            }
+            composable(PRIVACY_DATA_ROUTE) {
+                val factory = remember(appContainer) {
+                    PrivacyDataViewModel.factory(
+                        getStoredDataCategories = appContainer.getStoredDataCategories,
+                        deleteAllLocalData = appContainer.deleteAllLocalData,
+                    )
+                }
+                PrivacyDataRoute(
+                    onBack = navController::popBackStack,
+                    viewModel = viewModel(factory = factory),
+                )
             }
             composable("$TIMELINE_DETAIL_ROUTE/{$ENTRY_ID_ARGUMENT}") { entry ->
                 val entryId = entry.arguments
@@ -218,3 +235,4 @@ private enum class TopLevelDestination(
 
 private const val TIMELINE_DETAIL_ROUTE = "timeline_entry"
 private const val ENTRY_ID_ARGUMENT = "entryId"
+private const val PRIVACY_DATA_ROUTE = "privacy_data"
