@@ -40,7 +40,7 @@ PASS (testDebugUnitTest + assembleDebug)
 - Phase: `P4B`
 - Name: Permission Capability And Status
 - Status: `IN_PROGRESS`
-- Branch: `feature/p4b-platform-permissions`
+- Branch: `feature/p4b-settings-status`
 - Brief: `docs/agent/CURRENT_PHASE.md`
 
 Current P4B delivery:
@@ -50,6 +50,8 @@ Current P4B delivery:
   recognition, legacy Android, and unconfigured Health Connect.
 - Android permission-status reader wired through the manual `AppContainer`.
 - Foreground location and activity-recognition manifest declarations.
+- Immutable Settings state and truthful status cards for location, activity
+  recognition, and unconfigured Health Connect.
 - No permission requests, signal collection, or persistence.
 
 Only `P4B` is authorized. Do not begin `P4C` in this branch or conversation.
