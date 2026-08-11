@@ -6,7 +6,7 @@ Keep this file short. Replace stale values; do not append a session diary.
 
 - Last verified: 2026-08-11
 - Base branch: `main`
-- Baseline commit: `4773eea` (merge of P4B verification and documentation)
+- Baseline commit: `5284787` (merge of P4B completion state)
 - Android package: `com.herologs`
 - Minimum SDK: 26
 - Target and compile SDK: 36
@@ -29,7 +29,7 @@ Keep this file short. Replace stale values; do not append a session diary.
     unconfigured states.
   - Explicit foreground-location and activity-recognition request actions.
   - JVM mapping/state tests and Compose instrumentation coverage.
-  - Delivered through PRs #3–#7; latest verified merge: `4773eea`.
+  - Delivered through PRs #3–#8; latest verified code merge: `4773eea`.
 - Compose navigation includes LifeBar, Timeline, Insights, and Settings.
 - Room stores places and editable Timeline entries; schema version is 1.
 - DataStore stores onboarding completion.
@@ -51,7 +51,7 @@ system permission dialogs on an Android device or emulator.
 
 - Phase: `P4C`
 - Name: Local Data Controls
-- Status: `READY`
+- Status: `IN_PROGRESS`
 - Branch: `feature/p4c-local-data-controls`
 - Brief: `docs/agent/CURRENT_PHASE.md`
 
