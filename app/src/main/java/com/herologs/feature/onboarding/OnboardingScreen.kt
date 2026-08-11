@@ -3,12 +3,14 @@ package com.herologs.feature.onboarding
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -16,17 +18,20 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.herologs.R
 import com.herologs.designsystem.Ink
 import com.herologs.designsystem.Paper
 import com.herologs.designsystem.Sand
@@ -41,13 +46,21 @@ fun OnboardingRoute(
     if (state.isLoading) {
         LoadingScreen()
     } else {
-        OnboardingScreen(onContinue = viewModel::completeOnboarding)
+        OnboardingScreen(
+            uiState = state,
+            onNext = viewModel::nextStep,
+            onPrevious = viewModel::previousStep,
+            onComplete = viewModel::completeOnboarding,
+        )
     }
 }
 
 @Composable
 fun OnboardingScreen(
-    onContinue: () -> Unit,
+    uiState: OnboardingUiState,
+    onNext: () -> Unit,
+    onPrevious: () -> Unit,
+    onComplete: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -57,51 +70,157 @@ fun OnboardingScreen(
             .padding(horizontal = 24.dp, vertical = 32.dp),
         verticalArrangement = Arrangement.SpaceBetween,
     ) {
-        Column {
-            Column(
-                modifier = Modifier
-                    .size(76.dp)
-                    .clip(RoundedCornerShape(24.dp))
-                    .background(Sand),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
-            ) {
-                Text("H", style = MaterialTheme.typography.headlineLarge)
+        HeaderSection(
+            currentStepIndex = uiState.currentStepIndex,
+            totalSteps = uiState.totalSteps,
+        )
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f, fill = false),
+            verticalArrangement = Arrangement.Center,
+        ) {
+            when (uiState.currentStep) {
+                OnboardingStep.VALUE_PROP -> ValuePropStepContent()
+                OnboardingStep.PRIVACY_PROMISE -> PrivacyPromiseStepContent()
+                OnboardingStep.FUTURE_SIGNALS -> FutureSignalsStepContent()
+                OnboardingStep.READY -> ReadyStepContent()
             }
-            Spacer(Modifier.height(28.dp))
-            Text("Tu día, claro y en privado.", style = MaterialTheme.typography.headlineMedium)
-            Spacer(Modifier.height(12.dp))
-            Text(
-                "HeroLogs organiza señales y anotaciones que vos elijas para ayudarte a entender tus días.",
-                style = MaterialTheme.typography.bodyLarge,
-            )
-            Spacer(Modifier.height(24.dp))
-            PrivacyPromiseCard()
         }
 
-        Column {
-            Text(
-                "Podés empezar sin permisos. La Timeline de ejemplo es local y se puede borrar cuando quieras.",
-                color = Ink,
-                style = MaterialTheme.typography.bodyMedium,
-            )
-            Spacer(Modifier.height(16.dp))
-            Button(
-                onClick = onContinue,
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(16.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Ink,
-                    contentColor = Surface,
-                ),
-            ) {
+        NavigationSection(
+            uiState = uiState,
+            onNext = onNext,
+            onPrevious = onPrevious,
+            onComplete = onComplete,
+        )
+    }
+}
+
+@Composable
+private fun HeaderSection(
+    currentStepIndex: Int,
+    totalSteps: Int,
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Column(
+            modifier = Modifier
+                .size(56.dp)
+                .clip(RoundedCornerShape(18.dp))
+                .background(Sand),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+        ) {
+            Text("H", style = MaterialTheme.typography.headlineMedium)
+        }
+
+        Text(
+            text = stringResource(
+                R.string.onboarding_step_indicator,
+                currentStepIndex + 1,
+                totalSteps,
+            ),
+            style = MaterialTheme.typography.labelLarge,
+            color = Ink,
+        )
+    }
+}
+
+@Composable
+private fun ValuePropStepContent() {
+    Column {
+        Text(
+            text = stringResource(R.string.onboarding_value_title),
+            style = MaterialTheme.typography.headlineMedium,
+        )
+        Spacer(Modifier.height(12.dp))
+        Text(
+            text = stringResource(R.string.onboarding_value_subtitle),
+            style = MaterialTheme.typography.bodyLarge,
+        )
+        Spacer(Modifier.height(24.dp))
+        PrivacyPromiseCard()
+    }
+}
+
+@Composable
+private fun PrivacyPromiseStepContent() {
+    Column {
+        Text(
+            text = stringResource(R.string.onboarding_privacy_title),
+            style = MaterialTheme.typography.headlineMedium,
+        )
+        Spacer(Modifier.height(16.dp))
+        Card(
+            colors = CardDefaults.cardColors(containerColor = Surface),
+            shape = RoundedCornerShape(20.dp),
+        ) {
+            Column(Modifier.padding(20.dp)) {
                 Text(
-                    "Empezar sin permisos",
-                    modifier = Modifier.padding(vertical = 6.dp),
-                    fontWeight = FontWeight.Bold,
+                    text = stringResource(R.string.onboarding_privacy_badge),
+                    style = MaterialTheme.typography.labelLarge,
+                )
+                Spacer(Modifier.height(10.dp))
+                Text(
+                    text = stringResource(R.string.onboarding_privacy_body),
+                    style = MaterialTheme.typography.bodyMedium,
                 )
             }
         }
+    }
+}
+
+@Composable
+private fun FutureSignalsStepContent() {
+    Column {
+        Text(
+            text = stringResource(R.string.onboarding_signals_title),
+            style = MaterialTheme.typography.headlineMedium,
+        )
+        Spacer(Modifier.height(16.dp))
+        Card(
+            colors = CardDefaults.cardColors(containerColor = Surface),
+            shape = RoundedCornerShape(20.dp),
+        ) {
+            Column(Modifier.padding(20.dp)) {
+                Text(
+                    text = stringResource(R.string.onboarding_signals_badge),
+                    style = MaterialTheme.typography.labelLarge,
+                )
+                Spacer(Modifier.height(10.dp))
+                Text(
+                    text = stringResource(R.string.onboarding_signals_body),
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+                Spacer(Modifier.height(14.dp))
+                Text(
+                    text = stringResource(R.string.onboarding_signals_notice),
+                    style = MaterialTheme.typography.bodySmall,
+                    fontWeight = FontWeight.Bold,
+                    color = Ink,
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun ReadyStepContent() {
+    Column {
+        Text(
+            text = stringResource(R.string.onboarding_ready_title),
+            style = MaterialTheme.typography.headlineMedium,
+        )
+        Spacer(Modifier.height(12.dp))
+        Text(
+            text = stringResource(R.string.onboarding_ready_body),
+            style = MaterialTheme.typography.bodyLarge,
+        )
     }
 }
 
@@ -112,12 +231,73 @@ private fun PrivacyPromiseCard() {
         shape = RoundedCornerShape(20.dp),
     ) {
         Column(Modifier.padding(20.dp)) {
-            Text("LOCAL DESDE EL INICIO", style = MaterialTheme.typography.labelLarge)
+            Text(
+                text = stringResource(R.string.onboarding_privacy_badge),
+                style = MaterialTheme.typography.labelLarge,
+            )
             Spacer(Modifier.height(10.dp))
             Text(
-                "No hay cuenta ni nube en este MVP. Tus datos quedan en este dispositivo.",
+                text = stringResource(R.string.onboarding_privacy_body),
                 style = MaterialTheme.typography.bodyMedium,
             )
+        }
+    }
+}
+
+@Composable
+private fun NavigationSection(
+    uiState: OnboardingUiState,
+    onNext: () -> Unit,
+    onPrevious: () -> Unit,
+    onComplete: () -> Unit,
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 16.dp),
+        horizontalArrangement = Arrangement.End,
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        if (uiState.canGoBack) {
+            OutlinedButton(
+                onClick = onPrevious,
+                shape = RoundedCornerShape(16.dp),
+            ) {
+                Text(text = stringResource(R.string.onboarding_action_previous))
+            }
+            Spacer(Modifier.width(12.dp))
+        }
+
+        if (uiState.canGoNext) {
+            Button(
+                onClick = onNext,
+                shape = RoundedCornerShape(16.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Ink,
+                    contentColor = Surface,
+                ),
+            ) {
+                Text(
+                    text = stringResource(R.string.onboarding_action_next),
+                    fontWeight = FontWeight.Bold,
+                )
+            }
+        } else {
+            Button(
+                onClick = onComplete,
+                enabled = !uiState.isSavingCompletion,
+                shape = RoundedCornerShape(16.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Ink,
+                    contentColor = Surface,
+                ),
+            ) {
+                Text(
+                    text = stringResource(R.string.onboarding_action_start_no_permissions),
+                    modifier = Modifier.padding(vertical = 4.dp),
+                    fontWeight = FontWeight.Bold,
+                )
+            }
         }
     }
 }
@@ -133,6 +313,9 @@ private fun LoadingScreen() {
     ) {
         CircularProgressIndicator(color = Ink)
         Spacer(Modifier.height(12.dp))
-        Text("Preparando HeroLogs", textAlign = TextAlign.Center)
+        Text(
+            text = stringResource(R.string.onboarding_loading),
+            textAlign = TextAlign.Center,
+        )
     }
 }

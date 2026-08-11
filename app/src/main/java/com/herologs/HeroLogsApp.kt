@@ -56,7 +56,10 @@ fun HeroLogsApp(
     when {
         onboardingState.isLoading -> AppLoading()
         !onboardingState.hasCompletedOnboarding -> OnboardingScreen(
-            onContinue = onboardingViewModel::completeOnboarding,
+            uiState = onboardingState,
+            onNext = onboardingViewModel::nextStep,
+            onPrevious = onboardingViewModel::previousStep,
+            onComplete = onboardingViewModel::completeOnboarding,
         )
         else -> HeroLogsNavigation(appContainer)
     }
