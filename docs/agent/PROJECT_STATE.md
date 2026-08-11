@@ -39,11 +39,18 @@ PASS (testDebugUnitTest + assembleDebug)
 
 - Phase: `P4B`
 - Name: Permission Capability And Status
-- Status: `READY`
+- Status: `IN_PROGRESS`
 - Branch: `feature/p4b-permission-status`
 - Brief: `docs/agent/CURRENT_PHASE.md`
 
-Only `P4B` is authorized for the next implementation task. Do not begin `P4B` in the same branch or conversation.
+Current P4B delivery:
+
+- Pure Kotlin capability, access-status, and grant-snapshot models.
+- Deterministic mapping for precise/approximate location, runtime activity
+  recognition, legacy Android, and unconfigured Health Connect.
+- No Android permission declarations, requests, signal collection, or persistence.
+
+Only `P4B` is authorized. Do not begin `P4C` in this branch or conversation.
 
 ## Known Human Gates
 
@@ -56,7 +63,7 @@ Only `P4B` is authorized for the next implementation task. Do not begin `P4B` in
 - Before public alpha: decide whether Health Connect and weekly recap are MVP
   release blockers.
 
-These are future gates. They do not block `P4A`.
+These are future gates. They do not block `P4B`.
 
 ## State Update Rules
 
