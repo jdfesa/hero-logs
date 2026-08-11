@@ -26,4 +26,32 @@
     <!-- Navigation Actions -->
     <string name="onboarding_action_previous">Anterior</string>
     <string name="onboarding_action_next">Siguiente</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_privacy_eyebrow">PRIVACY</string>
+    <string name="settings_privacy_title">Your data stays local</string>
+    <string name="settings_privacy_body">HeroLogs has no account or cloud sync. Permission status is read on this device.</string>
+    <string name="settings_permissions_eyebrow">PERMISSIONS</string>
+    <string name="settings_location_title">Foreground location</string>
+    <string name="settings_activity_title">Activity recognition</string>
+    <string name="settings_health_connect_title">Health Connect</string>
+    <string name="settings_status_precise">Precise access</string>
+    <string name="settings_status_approximate">Approximate access</string>
+    <string name="settings_status_connected">Connected</string>
+    <string name="settings_status_available">Available</string>
+    <string name="settings_status_not_connected">Not connected</string>
+    <string name="settings_status_not_configured">Not configured</string>
+    <string name="settings_location_precise_body">HeroLogs can access precise location while the app is in use.</string>
+    <string name="settings_location_approximate_body">HeroLogs has approximate location access, so future timeline detail may be reduced.</string>
+    <string name="settings_location_missing_body">HeroLogs works without location. You can choose to connect it later.</string>
+    <string name="settings_activity_granted_body">HeroLogs can read recognized activity while supported features are in use.</string>
+    <string name="settings_activity_not_required_body">This Android version does not require a runtime permission for activity recognition.</string>
+    <string name="settings_activity_missing_body">HeroLogs works without activity recognition. Future trip confidence may be lower.</string>
+    <string name="settings_health_connect_body">Health Connect is optional and is not configured in this version.</string>
+    <string name="settings_experience_eyebrow">EXPERIENCE</string>
+    <string name="settings_onboarding_title">View the introduction again</string>
+    <string name="settings_onboarding_body">Review how local mode and optional permissions work.</string>
+    <string name="settings_onboarding_updating">Updating…</string>
+    <string name="settings_onboarding_action">Show introduction</string>
 </resources>

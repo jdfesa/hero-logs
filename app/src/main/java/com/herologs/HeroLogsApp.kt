@@ -145,7 +145,10 @@ private fun HeroLogsNavigation(appContainer: AppContainer) {
             }
             composable(TopLevelDestination.Settings.route) {
                 val factory = remember(appContainer) {
-                    SettingsViewModel.factory(appContainer.userPreferencesRepository)
+                    SettingsViewModel.factory(
+                        userPreferencesRepository = appContainer.userPreferencesRepository,
+                        permissionStatusReader = appContainer.permissionStatusReader,
+                    )
                 }
                 SettingsRoute(viewModel = viewModel(factory = factory))
             }
