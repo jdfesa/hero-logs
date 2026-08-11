@@ -56,6 +56,13 @@ class UserPreferencesRepository(
         }
     }
 
+    /** Removes every preference owned by HeroLogs and is safe to retry. */
+    suspend fun clearAll() {
+        dataStore.edit { preferences ->
+            preferences.clear()
+        }
+    }
+
     private companion object {
         val HAS_COMPLETED_ONBOARDING = booleanPreferencesKey("has_completed_onboarding")
     }

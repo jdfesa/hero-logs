@@ -2,7 +2,7 @@
 
 Status: `IN_PROGRESS`
 
-Branch: `feature/p4c-room-data-cleaner`
+Branch: `feature/p4c-preferences-cleaner`
 
 ## Objective
 
