@@ -40,7 +40,7 @@ PASS (testDebugUnitTest + assembleDebug)
 - Phase: `P4B`
 - Name: Permission Capability And Status
 - Status: `IN_PROGRESS`
-- Branch: `feature/p4b-permission-status`
+- Branch: `feature/p4b-platform-permissions`
 - Brief: `docs/agent/CURRENT_PHASE.md`
 
 Current P4B delivery:
@@ -48,7 +48,9 @@ Current P4B delivery:
 - Pure Kotlin capability, access-status, and grant-snapshot models.
 - Deterministic mapping for precise/approximate location, runtime activity
   recognition, legacy Android, and unconfigured Health Connect.
-- No Android permission declarations, requests, signal collection, or persistence.
+- Android permission-status reader wired through the manual `AppContainer`.
+- Foreground location and activity-recognition manifest declarations.
+- No permission requests, signal collection, or persistence.
 
 Only `P4B` is authorized. Do not begin `P4C` in this branch or conversation.
 
