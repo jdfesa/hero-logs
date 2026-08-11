@@ -1,6 +1,7 @@
 # Contributing To HeroLogs
 
-HeroLogs is in an early planning stage. Contributions should protect clarity, privacy, and maintainability.
+HeroLogs is in active MVP development. Contributions should protect clarity,
+privacy, and maintainability.
 
 ## Before Changing Code
 
@@ -14,6 +15,9 @@ Check whether the change affects:
 - User privacy.
 
 If it does, update the relevant document in `docs/`.
+
+Coding agents must also follow `AGENTS.md` and the single active phase in
+`docs/agent/PROJECT_STATE.md`.
 
 ## Pull Request Expectations
 
@@ -39,7 +43,7 @@ Use these files as the source of truth:
 
 ## Commit Style
 
-Prefer small, direct commits:
+Use small Conventional Commits in English:
 
 ```text
 docs: define timeline MVP

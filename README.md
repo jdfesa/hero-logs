@@ -55,6 +55,7 @@ Start here:
 - [Open Questions](docs/09-open-questions.md)
 - [Glossary](docs/10-glossary.md)
 - [Architecture Decision Records](docs/adr/)
+- [Agent Development Guide](docs/agent/README.md)
 
 ## Current Status
 
@@ -81,6 +82,10 @@ Run the unit tests with:
 ```
 
 For local terminal builds, use Android Studio's bundled JDK or another compatible JDK. The next milestone is integrating real device signals through progressive permission education.
+
+Agent-assisted implementation is intentionally limited to one reviewed phase at
+a time. See [the agent development guide](docs/agent/README.md) for the active
+phase, quality gates, and the Antigravity workflow.
 
 ## Guiding Principles
 
