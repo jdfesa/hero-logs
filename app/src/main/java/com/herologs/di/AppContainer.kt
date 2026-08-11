@@ -6,8 +6,14 @@ import com.herologs.core.database.HeroLogsDatabase
 import com.herologs.core.datastore.UserPreferencesRepository
 import com.herologs.core.datastore.userPreferencesDataStore
 import com.herologs.core.permissions.AndroidPermissionStatusReader
+import com.herologs.data.local.DefaultLocalDataRepository
+import com.herologs.data.local.PreferencesLocalDataCleaner
+import com.herologs.data.local.RoomLocalDataCleaner
 import com.herologs.data.timeline.DemoTimelineSeeder
 import com.herologs.data.timeline.RoomTimelineRepository
+import com.herologs.domain.localdata.DeleteAllLocalDataUseCase
+import com.herologs.domain.localdata.GetStoredDataCategoriesUseCase
+import com.herologs.domain.localdata.LocalDataRepository
 import com.herologs.domain.permissions.PermissionStatusReader
 import com.herologs.domain.timeline.SeedDemoTimelineUseCase
 import com.herologs.domain.timeline.TimelineDemoData
@@ -38,6 +44,15 @@ class AppContainer(context: Context) {
     val userPreferencesRepository = UserPreferencesRepository(
         dataStore = context.userPreferencesDataStore,
     )
+
+    val localDataRepository: LocalDataRepository = DefaultLocalDataRepository(
+        databaseCleaner = RoomLocalDataCleaner(database),
+        preferencesCleaner = PreferencesLocalDataCleaner(userPreferencesRepository),
+    )
+
+    val getStoredDataCategories = GetStoredDataCategoriesUseCase(localDataRepository)
+
+    val deleteAllLocalData = DeleteAllLocalDataUseCase(localDataRepository)
 
     val permissionStatusReader: PermissionStatusReader = AndroidPermissionStatusReader(context)
 

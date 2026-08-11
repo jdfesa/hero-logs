@@ -2,7 +2,7 @@
 
 Status: `IN_PROGRESS`
 
-Branch: `feature/p4c-preferences-cleaner`
+Branch: `feature/p4c-local-data-repository`
 
 ## Objective
 
