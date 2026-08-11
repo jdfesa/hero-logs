@@ -32,6 +32,7 @@ class SettingsScreenTest {
                         location = PermissionAccessStatus.NOT_GRANTED,
                         activity = PermissionAccessStatus.NOT_GRANTED,
                     ),
+                    onOpenPrivacyData = {},
                     onShowOnboardingAgain = {},
                     onRequestPermission = requestedCapabilities::add,
                 )
@@ -65,6 +66,7 @@ class SettingsScreenTest {
                         location = PermissionAccessStatus.GRANTED,
                         activity = PermissionAccessStatus.NOT_REQUIRED,
                     ),
+                    onOpenPrivacyData = {},
                     onShowOnboardingAgain = {},
                     onRequestPermission = {},
                 )

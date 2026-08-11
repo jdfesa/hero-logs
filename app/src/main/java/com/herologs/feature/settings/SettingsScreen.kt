@@ -39,6 +39,7 @@ import com.herologs.domain.permissions.PermissionCapabilityState
 
 @Composable
 fun SettingsRoute(
+    onOpenPrivacyData: () -> Unit,
     viewModel: SettingsViewModel = viewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -57,6 +58,7 @@ fun SettingsRoute(
     }
     SettingsScreen(
         uiState = uiState,
+        onOpenPrivacyData = onOpenPrivacyData,
         onShowOnboardingAgain = viewModel::showOnboardingAgain,
         onRequestPermission = { capability ->
             when (capability) {
@@ -80,6 +82,7 @@ fun SettingsRoute(
 @Composable
 fun SettingsScreen(
     uiState: SettingsUiState,
+    onOpenPrivacyData: () -> Unit,
     onShowOnboardingAgain: () -> Unit,
     onRequestPermission: (PermissionCapability) -> Unit,
     modifier: Modifier = Modifier,
@@ -98,6 +101,8 @@ fun SettingsScreen(
             eyebrow = stringResource(R.string.settings_privacy_eyebrow),
             title = stringResource(R.string.settings_privacy_title),
             body = stringResource(R.string.settings_privacy_body),
+            actionLabel = stringResource(R.string.settings_privacy_action),
+            onAction = onOpenPrivacyData,
         )
         Text(
             text = stringResource(R.string.settings_permissions_eyebrow),
@@ -250,6 +255,8 @@ private fun SettingsCard(
     eyebrow: String,
     title: String,
     body: String,
+    actionLabel: String,
+    onAction: () -> Unit,
 ) {
     Card(
         colors = CardDefaults.cardColors(containerColor = Surface),
@@ -261,6 +268,13 @@ private fun SettingsCard(
             Text(title, style = MaterialTheme.typography.titleMedium)
             Spacer(Modifier.height(6.dp))
             Text(body, color = MutedInk, style = MaterialTheme.typography.bodyMedium)
+            Spacer(Modifier.height(12.dp))
+            Button(
+                onClick = onAction,
+                colors = ButtonDefaults.buttonColors(containerColor = Ink, contentColor = Surface),
+            ) {
+                Text(actionLabel)
+            }
         }
     }
 }
