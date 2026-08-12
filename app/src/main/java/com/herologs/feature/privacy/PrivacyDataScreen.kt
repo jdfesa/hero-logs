@@ -28,6 +28,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.ui.semantics.liveRegion
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -131,12 +134,18 @@ fun PrivacyDataScreen(
                         R.string.privacy_delete_preferences_failure
                     },
                 ),
+                modifier = Modifier.semantics(mergeDescendants = true) {
+                    liveRegion = LiveRegionMode.Polite
+                },
             )
         }
         if (uiState.deletionComplete) {
             InformationCard(
                 title = stringResource(R.string.privacy_delete_success_title),
                 body = stringResource(R.string.privacy_delete_success_body),
+                modifier = Modifier.semantics(mergeDescendants = true) {
+                    liveRegion = LiveRegionMode.Polite
+                },
             )
         }
         DeleteAllCard(
@@ -160,8 +169,10 @@ private fun StoredCategoryCard(category: LocalDataCategory) {
 private fun InformationCard(
     title: String,
     body: String,
+    modifier: Modifier = Modifier,
 ) {
     Card(
+        modifier = modifier,
         colors = CardDefaults.cardColors(containerColor = Surface),
         shape = RoundedCornerShape(22.dp),
     ) {
@@ -197,17 +208,28 @@ private fun DeleteAllCard(
             Button(
                 onClick = onRequestDeleteAll,
                 enabled = !isDeleting,
+                modifier = Modifier.semantics {
+                    if (isDeleting) {
+                        liveRegion = LiveRegionMode.Polite
+                    }
+                },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.error,
                     contentColor = MaterialTheme.colorScheme.onError,
                 ),
             ) {
                 if (isDeleting) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.size(18.dp),
-                        color = Ink,
-                        strokeWidth = 2.dp,
-                    )
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(18.dp),
+                            color = Ink,
+                            strokeWidth = 2.dp,
+                        )
+                        Text(stringResource(R.string.privacy_delete_progress))
+                    }
                 } else {
                     Text(stringResource(R.string.privacy_delete_action))
                 }

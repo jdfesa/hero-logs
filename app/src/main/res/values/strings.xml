@@ -74,6 +74,7 @@
     <string name="privacy_delete_title">Delete all local data</string>
     <string name="privacy_delete_body">Permanently removes Timeline entries, places, and app preferences. You will return to the introduction. System permissions are not revoked.</string>
     <string name="privacy_delete_action">Delete all local data</string>
+    <string name="privacy_delete_progress">Deleting local data…</string>
     <string name="privacy_delete_dialog_title">Delete all local HeroLogs data?</string>
     <string name="privacy_delete_dialog_body">This cannot be undone. Timeline entries, places, and app preferences will be removed from this device. Android permission grants will remain unchanged.</string>
     <string name="privacy_delete_confirm">Delete all data</string>

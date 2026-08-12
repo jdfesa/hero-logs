@@ -4,6 +4,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasText
@@ -112,12 +116,53 @@ class PrivacyDataScreenTest {
         ).performScrollTo().assertIsDisplayed()
     }
 
+    @Test
+    fun deletionProgressAndResultsUsePoliteLiveRegions() {
+        var uiState by mutableStateOf(state(isDeleting = true))
+        composeRule.setContent {
+            HeroLogsTheme {
+                PrivacyDataScreen(
+                    uiState = uiState,
+                    onBack = {},
+                    onRequestDeleteAll = {},
+                    onConfirmDeleteAll = {},
+                    onDismissDeleteConfirmation = {},
+                )
+            }
+        }
+
+        composeRule.onNodeWithText("Deleting local data…")
+            .performScrollTo()
+            .assertIsDisplayed()
+            .assert(
+                SemanticsMatcher.expectValue(
+                    SemanticsProperties.LiveRegion,
+                    LiveRegionMode.Polite,
+                ),
+            )
+
+        composeRule.runOnIdle {
+            uiState = state(deletionComplete = true)
+        }
+        composeRule.onNodeWithText("Local data deleted")
+            .performScrollTo()
+            .assertIsDisplayed()
+            .assert(
+                SemanticsMatcher.expectValue(
+                    SemanticsProperties.LiveRegion,
+                    LiveRegionMode.Polite,
+                ),
+            )
+    }
+
     private fun deleteAction() = composeRule.onNode(
         hasText("Delete all local data") and hasClickAction(),
     )
 
     private fun state(
         isDeleteConfirmationVisible: Boolean = false,
+        isDeleting: Boolean = false,
+        deletionComplete: Boolean = false,
         deletionFailure: LocalDataDeletionResult.Failure? = null,
     ) = PrivacyDataUiState(
         storedCategories = listOf(
@@ -126,6 +171,8 @@ class PrivacyDataScreenTest {
             LocalDataCategory.APP_PREFERENCES,
         ),
         isDeleteConfirmationVisible = isDeleteConfirmationVisible,
+        isDeleting = isDeleting,
+        deletionComplete = deletionComplete,
         deletionFailure = deletionFailure,
     )
 }

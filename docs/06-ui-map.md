@@ -139,7 +139,8 @@ Main UI:
 - Exact stored categories: Timeline entries, places, and app preferences.
 - Notice that Android permission grants are system-managed.
 - Confirmed delete-all-local-data action.
-- Progress, success, database failure, and partial preferences failure states.
+- Progress, success, database failure, and partial preferences failure states;
+  progress and final results are announced as polite accessibility updates.
 - Back navigation to Settings; the bottom navigation remains hidden on this
   detail route.
 - Export data eventually.

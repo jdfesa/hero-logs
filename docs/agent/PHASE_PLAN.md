@@ -64,7 +64,7 @@ Do not add export, encryption, cloud backup, or selective deletion.
 
 ## P4C-QA — Local Data Controls Quality Follow-Up
 
-Status: `IN_PROGRESS`
+Status: `COMPLETE`
 
 Branches:
 
