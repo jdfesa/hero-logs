@@ -58,16 +58,16 @@ device or emulator.
 
 ## Active Phase
 
-- Phase: none authorized
-- Status: `BLOCKED`
-- Next candidate: `P4D` (Signal Contracts And Retention Decision)
-- Candidate branch: `feature/p4d-signal-contracts`
-- Blocked brief: `docs/agent/CURRENT_PHASE.md`
+- Phase: `P4C-QA` (Local Data Controls Quality Follow-Up)
+- Status: `IN_PROGRESS`
+- Current branch: `test/p4c-deletion-retry`
+- Remaining branch: `fix/p4c-deletion-feedback-accessibility`
+- Active brief: `docs/agent/CURRENT_PHASE.md`
 
 Last completed phase: `P4C`.
 
-Do not begin `P4D` until its retention and precision ADR receives a human
-decision.
+After P4C-QA, restore `P4D` as the blocked next candidate. Do not begin it until
+its retention and precision ADR receives a human decision.
 
 ## Known Human Gates
 
