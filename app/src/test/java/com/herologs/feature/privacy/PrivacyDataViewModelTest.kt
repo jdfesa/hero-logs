@@ -106,6 +106,35 @@ class PrivacyDataViewModelTest {
     }
 
     @Test
+    fun `retry after partial failure can complete deletion`() = runTest {
+        val failure = LocalDataDeletionResult.Failure(
+            failedStage = LocalDataDeletionStage.PREFERENCES,
+            clearedCategories = setOf(
+                LocalDataCategory.TIMELINE_ENTRIES,
+                LocalDataCategory.PLACES,
+            ),
+        )
+        val repository = FakeLocalDataRepository(
+            results = listOf(failure, LocalDataDeletionResult.Success),
+        )
+        val viewModel = viewModel(repository)
+
+        viewModel.requestDeleteAll()
+        viewModel.confirmDeleteAll()
+        advanceUntilIdle()
+        assertEquals(failure, viewModel.uiState.value.deletionFailure)
+
+        viewModel.requestDeleteAll()
+        assertEquals(null, viewModel.uiState.value.deletionFailure)
+        viewModel.confirmDeleteAll()
+        advanceUntilIdle()
+
+        assertEquals(2, repository.deleteCallCount)
+        assertTrue(viewModel.uiState.value.deletionComplete)
+        assertEquals(null, viewModel.uiState.value.deletionFailure)
+    }
+
+    @Test
     fun `duplicate confirmations do not start concurrent deletions`() = runTest {
         val pendingResult = CompletableDeferred<LocalDataDeletionResult>()
         val repository = FakeLocalDataRepository(pendingResult = pendingResult)
@@ -136,7 +165,8 @@ class PrivacyDataViewModelTest {
             LocalDataCategory.PLACES,
             LocalDataCategory.APP_PREFERENCES,
         ),
-        private val result: LocalDataDeletionResult = LocalDataDeletionResult.Success,
+        result: LocalDataDeletionResult = LocalDataDeletionResult.Success,
+        private val results: List<LocalDataDeletionResult> = listOf(result),
         private val pendingResult: CompletableDeferred<LocalDataDeletionResult>? = null,
     ) : LocalDataRepository {
         var deleteCallCount = 0
@@ -146,7 +176,8 @@ class PrivacyDataViewModelTest {
 
         override suspend fun deleteAll(): LocalDataDeletionResult {
             deleteCallCount += 1
-            return pendingResult?.await() ?: result
+            return pendingResult?.await()
+                ?: results.getOrElse(deleteCallCount - 1) { results.last() }
         }
     }
 }

@@ -62,6 +62,19 @@ docs.
 
 Do not add export, encryption, cloud backup, or selective deletion.
 
+## P4C-QA — Local Data Controls Quality Follow-Up
+
+Status: `IN_PROGRESS`
+
+Branches:
+
+- `test/p4c-deletion-retry`
+- `fix/p4c-deletion-feedback-accessibility`
+
+Strengthen retry coverage for partial deletion failures, then make deletion
+progress and result feedback accessible to assistive technologies. Do not
+change which data is stored or deleted, add new controls, or begin P4D.
+
 ## P4D — Signal Contracts And Retention Decision
 
 Status: `BLOCKED`, human gate required

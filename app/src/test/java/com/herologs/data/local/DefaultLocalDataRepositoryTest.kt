@@ -90,6 +90,41 @@ class DefaultLocalDataRepositoryTest {
     }
 
     @Test
+    fun `retry after preferences failure clears every category`() = runTest {
+        val calls = mutableListOf<String>()
+        var preferenceAttempts = 0
+        val repository = repository(
+            databaseCleaner = recordingCleaner("database", calls),
+            preferencesCleaner = LocalDataCleaner {
+                calls += "preferences"
+                preferenceAttempts += 1
+                if (preferenceAttempts == 1) {
+                    throw IllegalStateException("preferences unavailable")
+                }
+            },
+        )
+
+        val firstResult = repository.deleteAll()
+        val retryResult = repository.deleteAll()
+
+        assertEquals(
+            LocalDataDeletionResult.Failure(
+                failedStage = LocalDataDeletionStage.PREFERENCES,
+                clearedCategories = setOf(
+                    LocalDataCategory.TIMELINE_ENTRIES,
+                    LocalDataCategory.PLACES,
+                ),
+            ),
+            firstResult,
+        )
+        assertEquals(LocalDataDeletionResult.Success, retryResult)
+        assertEquals(
+            listOf("database", "preferences", "database", "preferences"),
+            calls,
+        )
+    }
+
+    @Test
     fun `database cancellation is propagated`() = runTest {
         val repository = repository(
             databaseCleaner = recordingCleaner(
