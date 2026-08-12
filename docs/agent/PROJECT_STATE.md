@@ -4,9 +4,9 @@ Keep this file short. Replace stale values; do not append a session diary.
 
 ## Repository Baseline
 
-- Last verified: 2026-08-11
+- Last verified: 2026-08-12
 - Base branch: `main`
-- Baseline commit: `91926e9` (merge of P4C Privacy & Data screen)
+- Baseline commit: `05f23e9` (merge of P4C-QA retry coverage)
 - Android package: `com.herologs`
 - Minimum SDK: 26
 - Target and compile SDK: 36
@@ -37,6 +37,12 @@ Keep this file short. Replace stale values; do not append a session diary.
   - Confirmed Privacy & Data screen reachable from Settings.
   - JVM, in-memory Room, and Compose coverage for core deletion behavior.
   - Delivered through PRs #9–#14; verified code commit: `21de170`.
+- Phase `P4C-QA` (Local Data Controls Quality Follow-Up) is complete:
+  - Repository and ViewModel tests prove recovery after a partial preferences
+    deletion failure.
+  - Deletion progress is visible as text, and progress/final results use polite
+    accessibility live regions.
+  - Delivered through PRs #15–#16; verified accessibility commit: `adad7c9`.
 - Compose navigation includes LifeBar, Timeline, Insights, Settings, and the
   Privacy & Data detail route.
 - Room stores places and editable Timeline entries; schema version is 1.
@@ -45,7 +51,7 @@ Keep this file short. Replace stale values; do not append a session diary.
 - No location/activity signal collection, Health Connect integration,
   notification, account, cloud, analytics, or score calculation exists.
 
-Full verification on 2026-08-11:
+Full verification on 2026-08-12:
 
 ```text
 ./scripts/verify.sh full
@@ -58,16 +64,16 @@ device or emulator.
 
 ## Active Phase
 
-- Phase: `P4C-QA` (Local Data Controls Quality Follow-Up)
-- Status: `IN_PROGRESS`
-- Current branch: `test/p4c-deletion-retry`
-- Remaining branch: `fix/p4c-deletion-feedback-accessibility`
-- Active brief: `docs/agent/CURRENT_PHASE.md`
+- Phase: none authorized
+- Status: `BLOCKED`
+- Next candidate: `P4D` (Signal Contracts And Retention Decision)
+- Candidate branch: `feature/p4d-signal-contracts`
+- Blocked brief: `docs/agent/CURRENT_PHASE.md`
 
-Last completed phase: `P4C`.
+Last completed phase: `P4C-QA`.
 
-After P4C-QA, restore `P4D` as the blocked next candidate. Do not begin it until
-its retention and precision ADR receives a human decision.
+Do not begin `P4D` until its retention and precision ADR receives a human
+decision.
 
 ## Known Human Gates
 

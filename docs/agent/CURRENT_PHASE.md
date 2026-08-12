@@ -1,22 +1,29 @@
-# P4C-QA: Local Data Controls Quality Follow-Up
+# P4D: Signal Contracts And Retention Decision
 
-Status: `IN_PROGRESS`
+Status: `BLOCKED` — human decision required
 
-Branches:
+Branch: `feature/p4d-signal-contracts`
 
-- `test/p4c-deletion-retry`
-- `fix/p4c-deletion-feedback-accessibility`
+## Required Decision
 
-## Scope
+Before implementation, record an approved ADR answering:
 
-- Prove that a partial preferences failure can be retried safely.
-- Prove that the Privacy & Data state recovers after a successful retry.
-- Expose deletion progress and final results to assistive technologies.
-- Add focused unit and Compose tests for the changed behavior.
+- whether derived place coordinates may be stored;
+- whether temporary raw location samples may be stored;
+- exact retention and cleanup behavior;
+- minimum precision needed for the MVP.
+
+The agent must not choose the ADR outcome.
+
+## Scope After Approval
+
+- Define Android-light location and activity signal models.
+- Define source contracts, normalization rules, and deterministic fakes.
+- Test validation, time ordering, confidence bounds, and redaction-safe
+  diagnostics.
 
 ## Out Of Scope
 
-- Changes to stored categories or deletion ordering.
-- New privacy controls or product features.
-- Signal contracts, collection, or persistence.
-- Any decision reserved for the P4D retention and precision ADR.
+- Platform signal collection.
+- Foreground or background tracking.
+- Persistence not explicitly authorized by the approved ADR.
